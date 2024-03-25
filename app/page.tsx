@@ -1,28 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
+import { WavyBackground } from "@/components/ui/wavy-background";
+import Navbar from "@/components/navbar/navbar";
 
 export default function Home() {
 
   return (
-    <main className="bg-gray-100 bg-opacity-50">
-      <nav className="px-8 py-4 flex items-center justify-between glass">
-        <div className="flex items-center">
-        <Image src="/palette-hub.png" alt="Palette-Hub" width={54} height={54}/>
-        <Link className="text-xl" href="#">Palette-Hub</Link>
-        <div className="mx-10 h-8 text-sm px-4 border-black border-solid border-l-[1px] border-opacity-20 flex items-center justify-between ">🔍
-        <input type="text" className="outline-none mx-2" placeholder="Type keywords..." />
-        </div>
-        </div>
-        <div className="w-96 flex justify-between">
-          <Link href="#">Documentation</Link>
-          <Link href="#">Blog</Link>
-          <Link href="#">Resources</Link>
-        </div>
-      </nav>
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
-      <div className="absolute left-[550px] top-[250px] w-full h-[546px]">
-        <span className="text-4xl font-bold">Palette-Hub</span>
+    <main className="">
+      <Navbar></Navbar>
+      <WavyBackground className="max-w-4xl mx-auto pb-36">
+      <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
+        Palette-Hub
+      </p>
+      <p className="text-base md:text-lg mt-4 text-white font-normal inter-var text-center">
+      Empowering designers and developers to craft stunning products with greater flexibility and joy.
+      </p>
+      <div className="flex justify-center">
+      <div className="flex justify-between w-[45%]">
+      <button className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all">Getting Started</button>
+      <button className="text-white bg-black bg-opacity-50 py-2 px-3 rounded-md border-[1px] my-4 border-black hover:bg-opacity-100 transition-all">Naming Conventions</button>
       </div>
+      </div>
+    </WavyBackground>
     </main>
   );
 }

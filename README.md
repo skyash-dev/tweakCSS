@@ -1,6 +1,6 @@
 <h1 align = "center"> 
   
-  ![logo](https://freeimage.host/i/JjoT2ku) 
+  ![logo](https://github.com/skyash101/tweakCSS/blob/main/client/public/palette-hub.png?raw=true)
   
   tweakCSS ⭐
 

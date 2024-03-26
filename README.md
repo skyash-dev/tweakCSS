@@ -1,8 +1,8 @@
 <h1 align = "center"> 
   
-  ![logo]() 
+  ![logo](https://freeimage.host/i/JjoT2ku) 
   
-  TweekCSS ⭐
+  tweakCSS ⭐
 
 </h1>
 

@@ -5,8 +5,8 @@ export default function Navbar(){
     return(
         <nav className="px-8 py-2 flex items-center justify-between glass -z-10 app-navbar">
         <div className="flex items-center">
-        <Image src="/palette-hub.png" alt="Palette-Hub" width={54} height={54}/>
-        <Link className="text-xl text-white font-bold" href="#">Palette-Hub</Link>
+        <Image src="/tweakCSS.png" alt="tweakCSS" width={54} height={54}/>
+        <Link className="text-xl text-white font-bold" href="#">tweakCSS</Link>
         <div className="mx-10 h-8 text-sm px-4 border-white border-solid border-l-[1px] border-opacity-20 flex items-center justify-between "><span className="text-lg">🔍</span>
         <input type="text" className="outline-none mx-2 bg-transparent text-white" placeholder="Type keywords..." />
         </div>

@@ -6,7 +6,7 @@ const nunito = Nunito({ subsets: ["latin-ext"] });
 
 
 export const metadata: Metadata = {
-  title: "Palette-Hub",
+  title: "tweakCSS",
   description: "Dynamic Palette Manager!",
 };
 

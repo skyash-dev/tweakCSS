@@ -14,8 +14,49 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image  from "next/image"
+import { useEffect, useRef, useState } from 'react';
+import Fetch from '../../lib/http';
+import { useRouter } from 'next/navigation';
+import { signupurl } from '../../lib/kv';
 
 export default function SignUp() {
+
+  const router = useRouter();
+	const [input, setInput] = useState({
+		username: '',
+		password: '',
+	});
+
+  useEffect(() => {
+		if (localStorage.getItem('TOKEN')) {
+			router.push('/')
+		}
+	},[]);
+
+  const error = (content: string) => {
+    alert(content);
+  }
+  const handelInputChange = (e: { target: { name: string, value: string } }): void => {
+		setInput({ ...input, [e.target.name]: e.target.value })
+	}
+
+	const handelSubmit = async (): Promise<void> => {
+		const { username, password } = input;
+		const payload = {
+			username,
+			password,
+		};
+		const api = new Fetch(payload, signupurl);
+
+		const res = await api.postJson();
+		if (res.status) {
+			localStorage.setItem('TOKEN', res.token);
+			router.push('./');
+		}
+		else error(res.msg);
+
+	}
+
   return (
     <div className="bg-black h-screen flex justify-center items-center" >
         <Card className="w-[350px] bg-black glass text-white">
@@ -27,25 +68,33 @@ export default function SignUp() {
       <CardContent>
         <form >
           <div className="grid w-full items-center gap-4" suppressHydrationWarning={true}>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input className="text-black" id="name" placeholder="Elon Musk" />
-            </div>
-            <div className="flex flex-col space-y-1.5" >
-              <Label htmlFor="name">Email</Label>
-              <Input className="text-black" id="name" placeholder="elon@x"/>
+          <div className="flex flex-col space-y-1.5" >
+              <Label htmlFor="name">User Name</Label>
+              <Input 
+              className="text-black" 
+              id="name" 
+              name="username"
+              placeholder="elon_x"
+              onChange={handelInputChange}
+              />
             </div>
             
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Password</Label>
-              <Input className="text-black" id="password" placeholder="****************" />
+              <Input 
+              className="text-black" 
+              id="password" 
+              name="password"
+              placeholder="****************"
+              onChange={handelInputChange}
+              />
             </div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" className="bg-red-500 border-none">Cancel</Button>
-        <Button className="glass">Create</Button>
+        <Button className="glass" onClick={handelSubmit}>Create</Button>
       </CardFooter>
     </Card>
     </div>

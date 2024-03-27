@@ -82,7 +82,7 @@ export default function Home() {
 
 function Hero() {
   return (<>
-    <div className="blob w-[550px] h-[300px] rounded-[300px] absolute bottom-[100px] right-[400px] -z-10 blur-3xl bg-opacity-60 opacity-50 bg-gradient-to-r from-purple-400 via-red-400 to-yellow-400"></div>
+    <div className="blob w-[550px] h-[300px] rounded-[300px] absolute top-[15%] right-[35%] -z-10 blur-3xl bg-opacity-60 opacity-50 bg-gradient-to-r from-purple-400 via-red-400 to-yellow-400"></div>
     <div className="my-36">
       <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
         tweakCSS

@@ -44,8 +44,13 @@ export default function Home() {
       <Hero></Hero>
       <div className="palletes w-full mt-[13.3rem] text-white flex justify-center py-20 bg-black">
         <div className="w-[60%]">
-          <span className="text-3xl font-semibold">Popular Palettes</span>
+          <span className="text-3xl font-semibold">Popular Themes</span>
           <div className="flex flex-col items-center my-6">
+          <div className="palette w-11/12 h-24 flex flex-col text-opacity-50 hover:text-opacity-100 cursor-pointer my-4 mb-8 text-white justify-center items-center glass">
+         <span className="text-2xl glass w-10 h-10 flex justify-center 
+         items-center rounded-full hover:scale-110 transition-all">+</span>
+         Create
+          </div>
             {
               themes.map((theme)=>{
                 return(

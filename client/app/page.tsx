@@ -64,7 +64,7 @@ export default function Home() {
                     )
                   })}
                 </div>
-                  <span className="mb-8 text-lg cursor-pointer hover:scale-110 transition-all">{theme.name}</span></>
+                  <span className="mb-8 text-lg cursor-pointer hover:scale-110 transition-all" key={index}>{theme.name}</span></>
                 )
               })
             }

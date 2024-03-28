@@ -52,12 +52,12 @@ export default function Home() {
          Create
           </div>
             {
-              themes.map((theme)=>{
+              themes.map((theme, index)=>{
                 return(
-                  <><div className="palette w-11/12 h-24 flex my-4">
-                  {theme.colors.map((color) => {
+                  <><div className="palette w-11/12 h-24 flex my-4" key={index}>
+                  {theme.colors.map((color, index) => {
                     return (
-                      <div className={`w-1/5 hover:w-2/5 transition-all h-full flex justify-center items-center text-[0] hover:text-base text-black cursor-pointer`} style={{ backgroundColor: `#${color}` }}>
+                      <div className={`w-1/5 hover:w-2/5 transition-all h-full flex justify-center items-center text-[0] hover:text-base text-black cursor-pointer`} style={{ backgroundColor: `#${color}` }} key={index}>
                         {color}
                       </div>
 

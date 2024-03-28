@@ -40,7 +40,7 @@ export default function SignUp() {
 		setInput({ ...input, [e.target.name]: e.target.value })
 	}
 
-	const handelSubmit = async (): Promise<void> => {
+	const handleSubmit = async (): Promise<void> => {
 		const { username, password } = input;
 		const payload = {
 			username,
@@ -48,12 +48,18 @@ export default function SignUp() {
 		};
 		const api = new Fetch(payload, signupurl);
 
-		const res = await api.postJson();
+		try{
+      const res = await api.postJson();
 		if (res.status) {
 			localStorage.setItem('TOKEN', res.token);
 			router.push('./');
 		}
 		else error(res.msg);
+    }
+    catch(e){
+      console.log(e);
+      
+    }
 
 	}
 
@@ -94,7 +100,7 @@ export default function SignUp() {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" className="bg-red-500 border-none">Cancel</Button>
-        <Button className="glass" onClick={handelSubmit}>Create</Button>
+        <Button className="glass" onClick={handleSubmit}>Create</Button>
       </CardFooter>
     </Card>
     </div>

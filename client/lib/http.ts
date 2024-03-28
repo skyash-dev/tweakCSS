@@ -8,41 +8,58 @@ export default class Fetch {
   }
 
   async postJson(): Promise<any> {
-    const res = await fetch(this.url, {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json',
-      },
-      body: JSON.stringify(this.payload)
-    });
-    const jsonRes = await res.json();
-
-    return jsonRes;
+    try{
+      const res = await fetch(this.url, {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(this.payload)
+      });
+      const jsonRes = await res.json();
+  
+      return jsonRes;
+    }
+    catch (e){
+      console.log(e);
+      
+    }
   }
 
   async postAuthjson() : Promise<any>{
-    const res = await fetch(this.url, {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json',
-        'Authorization': `${localStorage.getItem('TOKEN')}`
-      },
-      body: JSON.stringify(this.payload)
-    });
-    const jsonRes = await res.json();
-
-    return jsonRes;
+    try{
+      const res = await fetch(this.url, {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+          'Authorization': `${localStorage.getItem('TOKEN')}`
+        },
+        body: JSON.stringify(this.payload)
+      });
+      const jsonRes = await res.json();
+  
+      return jsonRes;
+    }
+    catch(e){
+      console.log(e);
+      
+    }
   }
 
   async get() : Promise<any>{
-    const res = await fetch(this.url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `${localStorage.getItem('TOKEN')}`
-      },
-    });
-    const jsonRes = await res.json();
-
-    return jsonRes;
+    try{
+      const res = await fetch(this.url, {
+        method: 'GET',
+        headers: {
+          'Authorization': `${localStorage.getItem('TOKEN')}`
+        },
+      });
+      const jsonRes = await res.json();
+  
+      return jsonRes;
+    }
+    catch(e){
+      console.log(e)
+    }
   }
 }

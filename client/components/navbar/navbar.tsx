@@ -11,7 +11,7 @@ export default function Navbar(){
         <input type="text" className="outline-none mx-2 bg-transparent text-white" placeholder="Type keywords..." />
         </div>
         </div>
-        <div className="w-96 flex justify-between text-white">
+        <div className="w-96 md:flex justify-between text-white hidden md:visible">
           <Link href="#">Documentation</Link>
           <Link href="#">Blog</Link>
           <Link href="#">Resources</Link>

@@ -19,3 +19,37 @@ Content-Type: application/json
     "username" : "amitanshusahu", "password" : "12345678"
 
 }
+
+### Create Palette
+POST http://localhost:3001/api/colorpalette/createpalette
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTE2OTY0MDh9.A-g2vADeYE0ZIebxvDTyDyycma9ez4hSsERlp-kcZkM
+
+{
+    "name": "Fuzzy Palette",
+    "color": {
+        "colorPrimary" : "red",
+        "colorSecondary" : "blue"
+    }
+}
+
+### Get All Palette
+GET  http://localhost:3001/api/colorpalette/getallpalettes
+
+
+### Get My Palette
+GET  http://localhost:3001/api/colorpalette/getallpalettes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTE2OTY0MDh9.A-g2vADeYE0ZIebxvDTyDyycma9ez4hSsERlp-kcZkM
+
+
+### Save My Palette
+POST http://localhost:3001/api/colorpalette/savemypalette
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTE2OTY0MDh9.A-g2vADeYE0ZIebxvDTyDyycma9ez4hSsERlp-kcZkM
+
+{
+    "color": {
+        "colorPrimary" : "red",
+        "colorSecondary" : "blue"
+    }
+}

@@ -7,6 +7,7 @@ const cors = require('cors');
 
 // Controllers
 const userRoutes = require('./routes/userRoutes');
+const colorPalette = require('./routes/colorPaletteRoutes');
 
 
 // MiddleWares
@@ -16,6 +17,7 @@ app.use(express.json({ limit: '5mb' }));
 
 // Routes
 app.use('/api/auth', userRoutes);
+app.use('/api/colorpalette', colorPalette);
 app.get('/', (req, res) => {
   res.json({status: true, msg: "server is working as expected"});
 });

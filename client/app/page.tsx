@@ -39,10 +39,10 @@ export default function Home() {
 
   return (
     <main className="">
-      <div className="bg-black h-screen absolute w-full -z-10"></div>
+      <div className="h-screen absolute w-full -z-10"></div>
       <Navbar></Navbar>
       <Hero></Hero>
-      <div className="palletes w-full text-white flex justify-center py-20 bg-black">
+      <div className="palletes w-full text-white flex justify-center py-20">
         <div className="w-[60%]">
           <span className="text-3xl font-semibold">Popular Themes</span>
           <div className="flex flex-col items-center my-6">
@@ -94,7 +94,7 @@ function Hero() {
       <div className="flex justify-center">
         <div className="flex justify-between w-96">
           <button className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20">Getting Started</button>
-          <button className="text-white bg-black bg-opacity-50 py-2 px-3 rounded-md border-[1px] my-4 border-black hover:bg-opacity-100 transition-all border-opacity-20">Naming Conventions</button>
+          <button className="text-white bg-opacity-50 py-2 px-3 rounded-md border-[1px] my-4 border-black hover:bg-opacity-100 transition-all border-opacity-20">Naming Conventions</button>
         </div>
       </div>
     </div>

@@ -99,7 +99,7 @@ text-shadow: 0 1px rgb(0 0 0/var(--glass-text-shadow-opacity,5%));
   }
   ::-webkit-scrollbar-thumb {
     background-color: purple 500;
-    border-radius: 0.25em;
+    border-radius: 0em;
   }
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }

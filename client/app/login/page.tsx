@@ -65,8 +65,8 @@ export default function Login() {
     }
 
   return (
-    <div className="bg-black h-screen flex justify-center items-center" >
-        <Card className="w-[350px] bg-black glass text-white">
+    <div className="h-screen flex justify-center items-center" >
+        <Card className="w-[350px] glass text-white">
       <CardHeader>
             <Image src="/tweakCSS.png" width={42} height={42} alt="tweakCSS"></Image>
         <CardTitle>Login</CardTitle>

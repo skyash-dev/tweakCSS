@@ -13,7 +13,6 @@ import {ReactFlow, MiniMap,
     Background,} from 'reactflow';
  
 import 'reactflow/dist/style.css';
-import Layout from "@/components/ui/Layout";
 
 const nodeTypes = { layout: Layout };
 
@@ -105,3 +104,16 @@ const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
         </>
     );
 };
+
+function Layout() {
+    return (
+      <div className="layout text-black">
+        <div className='colorPrimary bg-white py-2 px-4 my-6'>colorPrimary</div>
+        <div className='colorSecondary bg-white py-2 px-4 my-6'>colorSecondary</div>
+        <div className='textColor bg-white py-2 px-4 my-6'>textColor</div>
+        <div className='borderColor bg-white py-2 px-4 my-6'>borderColor</div>
+        <div className='errorColor bg-white py-2 px-4 my-6'>errorColor</div>
+        <div className='warningColor bg-white py-2 px-4 my-6'>warningColor</div>
+      </div>
+    );
+  }

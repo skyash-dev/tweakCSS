@@ -6,6 +6,11 @@ const colorPaletteSchema = mongoose.Schema({
   color:{
     colorPrimary: String,
     colorSecondary: String,
+    colorSecondary: String,
+    textColor: String,
+    borderColor: String,
+    errorColor: String,
+    warningColor:String
   }
 });
 

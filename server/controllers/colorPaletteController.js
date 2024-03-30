@@ -3,6 +3,7 @@ const UserPalette = require('../models/userPalette');
 
 
 module.exports.createPalette = (req, res) => {
+  console.log(req)
   let { name, color } = req.body;
   console.log(name, color);
 

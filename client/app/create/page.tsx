@@ -17,6 +17,7 @@ import 'reactflow/dist/style.css';
 const nodeTypes = { layout: Layout };
 
 export default function Create() {
+    
     const [colors, setColors] = useState({
         colorPrimary: "#FFF",
         colorSecondary: "#FFF",
@@ -47,7 +48,7 @@ export default function Create() {
             <ResizableHandle withHandle />
             <ResizablePanel className="glass min-h-screen flex justify-center items-center">
                 <ReactFlow nodeTypes={nodeTypes} fitView nodes={[{id: '0', type:'layout',
-    data: { value:0 },
+    data: { value:0, colors:colors },
     position: { x: 0, y: 0 },}]}>
                 <Controls />
         <Background gap={12} size={1} />
@@ -59,6 +60,7 @@ export default function Create() {
 }
 
 const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
+    let selectedColor = ""
     const [toggleThisElement, setToggleThisElement] = useState(false);
     
     
@@ -87,8 +89,11 @@ const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
                 </button>
 
             </div>
-            <div className="absolute left-60 bottom-12 z-10">{toggleThisElement && <HexColorPicker className=" absolute left-0 " color={colors[keyName]} onChange={(change)=>{
-                setColors({...colors, [keyName]: change})
+            <div className="absolute left-60 bottom-12 z-10">{toggleThisElement && <HexColorPicker className=" absolute left-0 " color={colors[keyName]} onClick={()=>{
+                setColors({...colors, [keyName]: selectedColor})
+            }} onChange={(change)=>{
+                // console.log(change)
+                selectedColor = change
                 // let newColors={}
                 // Object.keys(colors).map((key)=>{
                 //     if(key==keyName){
@@ -105,15 +110,16 @@ const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
     );
 };
 
-function Layout() {
+function Layout({data}:any) {
     return (
       <div className="layout text-black">
-        <div className='colorPrimary bg-white py-2 px-4 my-6'>colorPrimary</div>
-        <div className='colorSecondary bg-white py-2 px-4 my-6'>colorSecondary</div>
-        <div className='textColor bg-white py-2 px-4 my-6'>textColor</div>
-        <div className='borderColor bg-white py-2 px-4 my-6'>borderColor</div>
-        <div className='errorColor bg-white py-2 px-4 my-6'>errorColor</div>
-        <div className='warningColor bg-white py-2 px-4 my-6'>warningColor</div>
+        {
+            Object.keys(data.colors).map((keyName, index)=>{
+                return(
+                    <div className={`py-2 px-4 my-6`} style={{backgroundColor: `${data.colors[keyName]}`}} key={index}>{keyName}</div>
+                )
+            })
+        }
       </div>
     );
   }

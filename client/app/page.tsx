@@ -67,7 +67,7 @@ function Hero() {
         Empowering designers and developers to craft stunning products with greater flexibility and joy.
       </p>
       <div className="flex justify-center">
-        <div className="flex justify-between w-96">
+        <div className={`flex justify-between w-96 ${localStorage.getItem('TOKEN')? 'hidden' : 'visible'}`}>
           <Link className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20 w-1/2 text-center mx-6" href="/login">Login</Link>
           <Link className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20 w-1/2 text-center mx-6" href="/signup">Signup</Link>
         </div>

@@ -8,16 +8,27 @@ import {
 import { useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import React from 'react';
-import {ReactFlow, MiniMap,
+import {
+    ReactFlow, MiniMap,
     Controls,
-    Background,} from 'reactflow';
- 
+    Background,
+} from 'reactflow';
+
 import 'reactflow/dist/style.css';
+import { Button } from "@/components/ui/button";
+import Fetch from "@/lib/http";
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { createurl, cssurl } from "@/lib/kv";
 
 const nodeTypes = { layout: Layout };
 
 export default function Create() {
-    
+    const error = (content: string) => {
+        alert(content);
+      }
+    const router = useRouter();
+    const [name, setName] = useState("")
     const [colors, setColors] = useState({
         colorPrimary: "#FFF",
         colorSecondary: "#FFF",
@@ -28,30 +39,61 @@ export default function Create() {
     })
     return (
         <ResizablePanelGroup direction="horizontal" className="text-white">
-            <ResizablePanel className="min-h-screen flex justify-center items-center">
-                <div className="properties max-h-screen scrollbar">
+            <ResizablePanel className="min-h-screen flex px-6 justify-center">
+                <div className="properties max-h-screen scrollbar flex flex-col items-center">
+                    <div>
+                        <Input className="text-black my-4" placeholder="Name Your Palette!" value={name} onChange={(e) => {
+                            setName(e.target.value)
+                        }}></Input>
+                    </div>
                     {
                         Object.keys(colors).map((keyName, i) => {
                             return (
-                                <div className="glass px-6 py-2 min-w-72 flex justify-between items-center rounded-md my-6" key={i}>
-                                <span>{keyName}</span>
-                                <TogglePicker id={i} colors={colors} setColors={setColors} keyName={keyName}></TogglePicker>
-                            </div>
+                                <div className="flex items-center">
+                                <div className="glass px-6 py-2 min-w-48 flex justify-between items-center rounded-md my-2 mx-2" key={i}>
+                                    <span>{keyName}</span>
+                                </div>
+                                    <TogglePicker id={i} colors={colors} setColors={setColors} keyName={keyName}></TogglePicker>
+                                    </div>
                             )
                         })
                     }
 
-                    <div>
+                    <div className="w-11/12 flex justify-center">
+                        <Button className="bg-white text-black my-4 hover:text-white" onClick={async(e) => {
+                            e.preventDefault()
+                            const payload = {
+                                name,
+                                color: colors
+                            };
+                            const api = new Fetch(payload, createurl);
+
+                            try {
+                                const res = await api.postAuthjson();
+                                if (res.status) {
+                                    alert(`Your CSS URL is: ${cssurl+res.id}`)
+                                    // router.push('./');
+                                }
+                                else error(res.msg);
+                            }
+                            catch (e) {
+                                alert(e)
+                            }
+
+                        }}>Create Palette</Button>
+                        
                     </div>
                 </div>
             </ResizablePanel>
             <ResizableHandle withHandle />
             <ResizablePanel className="glass min-h-screen flex justify-center items-center">
-                <ReactFlow nodeTypes={nodeTypes} fitView nodes={[{id: '0', type:'layout',
-    data: { value:0, colors:colors },
-    position: { x: 0, y: 0 },}]}>
-                <Controls />
-        <Background gap={12} size={1} />
+                <ReactFlow nodeTypes={nodeTypes} fitView nodes={[{
+                    id: '0', type: 'layout',
+                    data: { value: 0, colors: colors },
+                    position: { x: 0, y: 0 },
+                }]}>
+                    <Controls />
+                    <Background gap={12} size={1} />
                 </ReactFlow>
             </ResizablePanel>
         </ResizablePanelGroup>
@@ -61,12 +103,12 @@ export default function Create() {
 
 const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
     let selectedColor = ""
-    const [toggleThisElement, setToggleThisElement] = useState(false);
-    
-    
+    const [showPicker, setShowPicker] = useState(false);
+
+
     const handleClickClosePanelFromOutside = (e: any) => {
         if (e.target.className != "react-colorful__interactive" && e.target.className != "react-colorful__pointer react-colorful__hue-pointer") {
-            setToggleThisElement(false);
+            setShowPicker(false);
         }
     }
 
@@ -78,20 +120,21 @@ const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
     })
 
     return (
-        <>
-            <div className="absolute top-[6px] right-6" key={id}>
+        <div className="">
+            <div className=" top-[6px] right-6" key={id}>
                 <button
                     className="w-12 h-7 rounded-md"
-                    style={{backgroundColor: `${colors[keyName]}`}}
-                    onClick={() => setToggleThisElement((prev) => !prev)}
+                    style={{ backgroundColor: `${colors[keyName]}` }}
+                    onClick={() => setShowPicker(true)}
                 >
 
                 </button>
 
             </div>
-            <div className="absolute left-60 bottom-12 z-10">{toggleThisElement && <HexColorPicker className=" absolute left-0 " color={colors[keyName]} onClick={()=>{
-                setColors({...colors, [keyName]: selectedColor})
-            }} onChange={(change)=>{
+            <div className=" bg-red-500 absolute ">{showPicker ? <HexColorPicker className=" absolute left-0" color={colors[keyName]} onClick={() => {
+                setColors({ ...colors, [keyName]: selectedColor })
+                setShowPicker(false)
+            }} onChange={(change) => {
                 // console.log(change)
                 selectedColor = change
                 // let newColors={}
@@ -104,22 +147,22 @@ const TogglePicker = ({ id, colors, setColors, keyName }: any) => {
                 //     }
                 // })
                 // setColors(newColors)
-                
-            }}/>}</div>
-        </>
+
+            }} />:null}</div>
+        </div>
     );
 };
 
-function Layout({data}:any) {
+function Layout({ data }: any) {
     return (
-      <div className="layout text-black">
-        {
-            Object.keys(data.colors).map((keyName, index)=>{
-                return(
-                    <div className={`py-2 px-4 my-6`} style={{backgroundColor: `${data.colors[keyName]}`}} key={index}>{keyName}</div>
-                )
-            })
-        }
-      </div>
+        <div className="layout text-black">
+            {
+                Object.keys(data.colors).map((keyName, index) => {
+                    return (
+                        <div className={`py-2 px-4 my-6`} style={{ backgroundColor: `${data.colors[keyName]}` }} key={index}>{keyName}</div>
+                    )
+                })
+            }
+        </div>
     );
-  }
+}

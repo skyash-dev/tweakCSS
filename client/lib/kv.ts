@@ -3,6 +3,9 @@ export const BASE_URI = `http://localhost:3001/api`
 export const signupurl: string = `${BASE_URI}/auth/signup`;
 export const loginurl: string = `${BASE_URI}/auth/login`;
 
+export const createurl: string = `${BASE_URI}/colorpalette/createpalette`;
+export const cssurl: string = `${BASE_URI}/colorpalette/`;
+
 
 
 export let TOKEN: string;

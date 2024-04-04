@@ -21,7 +21,6 @@ import { loginurl } from '../../lib/kv';
 
 export default function Login() {
 
-
   const router = useRouter();
 	const [input, setInput] = useState({
 		username: '',

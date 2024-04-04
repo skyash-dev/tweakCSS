@@ -56,6 +56,14 @@ export default function Home() {
 }
 
 function Hero() {
+  const [isSignedIn, setIsSignedIn] = useState(false)
+
+  useEffect(()=>{
+    if(localStorage.getItem('TOKEN')){
+      setIsSignedIn(true)
+    }
+  },[])
+
   return (<>
     <div className="blob w-[550px] h-[300px] rounded-[300px] absolute top-[15%] right-[35%] -z-10 blur-3xl bg-opacity-60 opacity-50 bg-gradient-to-r from-purple-400 via-red-400 to-yellow-400"></div>
     <div className="my-36 flex flex-col items-center">
@@ -67,7 +75,7 @@ function Hero() {
         Empowering designers and developers to craft stunning products with greater flexibility and joy.
       </p>
       <div className="flex justify-center">
-        <div className={`flex justify-between w-96 ${localStorage.getItem('TOKEN')? 'hidden' : 'visible'}`}>
+        <div className={`flex justify-between w-96 ${isSignedIn? 'hidden' : 'visible'}`}>
           <Link className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20 w-1/2 text-center mx-6" href="/login">Login</Link>
           <Link className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20 w-1/2 text-center mx-6" href="/signup">Signup</Link>
         </div>

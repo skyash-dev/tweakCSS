@@ -49,7 +49,7 @@ export default function Create() {
                     {
                         Object.keys(colors).map((keyName, i) => {
                             return (
-                                <div className="flex items-center">
+                                <div className="flex items-center" key={i}>
                                 <div className="glass px-6 py-2 min-w-48 flex justify-between items-center rounded-md my-2 mx-2" key={i}>
                                     <span>{keyName}</span>
                                 </div>
@@ -71,7 +71,7 @@ export default function Create() {
                             try {
                                 const res = await api.postAuthjson();
                                 if (res.status) {
-                                    alert(`Your CSS URL is: ${cssurl+res.id}`)
+                                        alert(`Your CSS URL is: ${cssurl+res.id}`)
                                     // router.push('./');
                                 }
                                 else error(res.msg);

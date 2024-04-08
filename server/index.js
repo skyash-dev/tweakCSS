@@ -19,11 +19,11 @@ app.use(express.json({ limit: '5mb' }));
 app.use('/api/auth', userRoutes);
 app.use('/api/colorpalette', colorPalette);
 app.get('/', (req, res) => {
-  res.json({status: true, msg: "server is working as expected"});
+  res.json({status: true, message: "server is working as expected"});
 });
 
 
 // listen
 app.listen(port, () => {
-  console.log('Example app listening on port', port);
+  console.log('Example App Listening on PORT', port);
 });

@@ -6,81 +6,34 @@ import Navbar from "@/components/navbar/navbar";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [palettes, setPalettes] = useState([])
-  useEffect(() => {
-    fetchPalettes()
-  }, [])
-
-  const fetchPalettes = async (): Promise<void> => {
-    await fetch('http://localhost:3001/api/colorpalette/getallpalettes').then((res) => res.json()).then((data) => {
-      setPalettes(data['palettes'])
-    })
-  }
 
   return (
     <main className="">
       <div className="h-screen absolute w-full -z-10"></div>
       <Navbar></Navbar>
       <Hero></Hero>
-      <div className="palletes w-full text-white flex justify-center py-20">
-        <div className="w-[60%]">
-          <span className="text-3xl font-semibold">Popular Themes</span>
-          <div className="flex flex-col items-center my-6">
-            <Link className="palette w-11/12 h-24 flex flex-col text-opacity-50 hover:text-opacity-100 cursor-pointer my-4 mb-8 text-white justify-center items-center glass" href="/create">
-              <span className="text-2xl glass w-10 h-10 flex justify-center 
-         items-center rounded-full hover:scale-110 transition-all">+</span>
-              Create
-            </Link>
-            
-            {
-              palettes.map((palette, index) => {
-                return (
-                  <><div className="palette w-11/12 h-24 flex my-4" key={index+1}>
-                    {Object.keys(palette['color']).map((keyName, index) => {
-                      return (
-                        <div className={`w-1/5 hover:w-2/5 transition-all h-full flex justify-center items-center text-[0] hover:text-base text-black cursor-pointer`} style={{ backgroundColor: `${palette['color'][keyName]}` }} key={index}>
-                          {palette['color'][keyName]}
-                        </div>
-                      )
-                    })}
-                  </div>
-                    <span className="mb-8 text-lg cursor-pointer hover:scale-110 transition-all" key={index}>{palette['name']}</span></>
-                )
-              })
-            }
-          </div>
-        </div>
-      </div>
     </main>
   );
 }
 
 function Hero() {
-  const [isSignedIn, setIsSignedIn] = useState(false)
 
-  useEffect(()=>{
-    if(localStorage.getItem('TOKEN')){
-      setIsSignedIn(true)
-    }
-  },[])
-
-  return (<>
-    <div className="blob w-[550px] h-[300px] rounded-[300px] absolute top-[15%] right-[35%] -z-10 blur-3xl bg-opacity-60 opacity-50 bg-gradient-to-r from-purple-400 via-red-400 to-yellow-400"></div>
-    <div className="my-36 flex flex-col items-center">
-      {/* <Image src="/tweakCSS.png" alt="tweakCSS" width={54} height={54}/> */}
-      <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
-        tweakCSS
-      </p>
-      <p className="text-base md:text-lg my-4 text-white font-normal inter-var text-center px-4 w-1/2">
-        Empowering designers and developers to craft stunning products with greater flexibility and joy.
-      </p>
-      <div className="flex justify-center">
-        <div className={`flex justify-between w-96 ${isSignedIn? 'hidden' : 'visible'}`}>
-          <Link className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20 w-1/2 text-center mx-6" href="/login">Login</Link>
-          <Link className="text-white bg-blue-500 py-2 px-3 rounded-md border-[1px] my-4 border-black bg-opacity-50 hover:bg-opacity-100 transition-all border-opacity-20 w-1/2 text-center mx-6" href="/signup">Signup</Link>
-        </div>
+  return (
+    <div className="my-32 flex flex-col items-center">
+      <div className="blob w-[550px] h-[200px] rounded-[300px] absolute top-[250px] left-[-200px] origin-left -z-10 blur-3xl bg-opacity-40 opacity-50 bg-gradient-to-r from-[#05051E] to-[#581C87] animate-moveVertical"></div>
+      <div className="absolute h-full md:w-[300px] top-[60px] left-0 rounded-r-full bg-[#05051E] border-white border-opacity-10 border-[1px] w-0 -z-10">
       </div>
+      <div className="blob w-[550px] h-[200px] rounded-[300px] absolute top-[250px] right-[0px] origin-right -z-10 blur-3xl bg-opacity-40 opacity-50 bg-gradient-to-r from-[#05051E] to-[#581C87] animate-moveVertical"></div>
+      <div className="absolute h-full md:w-[300px] top-[60px] right-0 rounded-l-full bg-[#05051E] border-white border-opacity-10 border-[1px] w-0 -z-10">
+      </div>
+      <Image src="/tweakCSS.png" alt="tweakCSS" width={80} height={80}/>
+      <p className="text-[32px] md:text-[45px] text-white font-semibold inter-var text-center w-[350px] md:w-[450px]">
+        tweakCSS is Redifining Styling.
+      </p>
+      <p className="text-[16px] my-4 text-white font-normal inter-var text-center px-4 w-[450px] opacity-50">
+      Customize CSS in real-time with our intuitive dashboard. Get theme suggestions and optimize performance effortlessly.
+      </p>
+      <Link className="bg-purple-600 hover:bg-purple-700 px-4 py-2 text-sm text-white rounded-md" href={"/home"}>Get Started!</Link>
     </div>
-  </>
   )
 }

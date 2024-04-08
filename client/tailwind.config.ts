@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      backgroundImage:{
+        'bg-gradient':'radial-gradient(circle at 100%, #05051E, #581C87);'
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -104,12 +107,14 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        moveVertical: "moveVertical 6s infinite",
         gradient: "one 10s infinite",
         first: "moveVertical 30s ease infinite",
         second: "moveInCircle 20s reverse infinite",
         third: "moveInCircle 40s linear infinite",
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
+        'spin-slow': 'rotate(180deg) 3s linear infinite',
       },
     },
   },

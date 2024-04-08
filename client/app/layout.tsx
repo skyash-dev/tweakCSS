@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Nunito } from "next/font/google";
+import { Urbanist } from "next/font/google";
 
-const nunito = Nunito({ subsets: ["latin-ext"] });
+const urbanist = Urbanist({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} bg-black`}>{children}</body>
+      <body className={`${urbanist.className} bg-[#05051E]`}>{children}</body>
     </html>
   );
 }

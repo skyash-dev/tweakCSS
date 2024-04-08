@@ -13,9 +13,9 @@ module.exports.signup = (req, res) => {
         Users.create({ username, password });
         const token = jwt.sign({ username }, secretKey);
         res.status(200).json({ status: true, token });
-        console.log("Created a user account for", username);
+        // console.log("CREATED A USER ACCOUNT FOR:", username);
       } else {
-        res.status(400).json({ status: false, msg: "User Already exists" });
+        res.status(400).json({ status: false, message: "USER ALREADY EXISTS!" });
       }
     })
 
@@ -23,7 +23,7 @@ module.exports.signup = (req, res) => {
 
 module.exports.login = (req, res) => {
   let { username, password } = req.body;
-  console.log(username, password)
+  // console.log(username, password)
 
   // check if usr exists
   Users.findOne({ username, password })
@@ -32,9 +32,9 @@ module.exports.login = (req, res) => {
       if (user) {
         const token = jwt.sign({ username }, secretKey);
         res.status(200).json({ status: true, token });
-        console.log(username, "Logged in");
+        // console.log(username, "LOGGED IN");
       } else {
-        res.status(400).json({ status: false, msg: "Invalid Username or Password" });
+        res.status(400).json({ status: false, message: "INVALID USERNAME OR PASSWORD!" });
       }
     })
 }

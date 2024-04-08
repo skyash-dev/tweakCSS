@@ -1,12 +1,11 @@
 const routes = require('express').Router();
 const { protect } = require("../modules/jwt");
 const colorPaletteController = require('../controllers/colorPaletteController');
-const { createPalette, getallpalettes, getmypalettes, savepalette, getbyid } = colorPaletteController;
+const { createPalette, getAllPalettes, getMyPalettes, getByID } = colorPaletteController;
 
 routes.post('/createpalette', protect, createPalette);
-routes.get('/getallpalettes', getallpalettes);
-routes.get('/getmypalette', protect, getmypalettes);
-routes.post('/savemypalette', protect, savepalette);
-routes.get('/:id',  getbyid);
+routes.get('/getallpalettes', getAllPalettes);
+routes.get('/getmypalettes', protect, getMyPalettes);
+routes.get('/:id',  getByID);
 
 module.exports = routes;

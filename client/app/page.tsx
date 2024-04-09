@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="">
       <div className="h-screen absolute w-full -z-10"></div>
-      <Navbar></Navbar>
+      <Navbar isLogo={false}></Navbar>
       <Hero></Hero>
     </main>
   );

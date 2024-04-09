@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="">
       <div className="static h-[60px]">
-        <Navbar></Navbar>
+        <Navbar isLogo={true}></Navbar>
       </div>
       <div className="flex">
         <Sidebar></Sidebar>

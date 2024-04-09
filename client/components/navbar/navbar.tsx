@@ -1,9 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 
-export default function Navbar() {
+interface props {
+  isLogo:boolean;
+}
+
+export default function Navbar({isLogo}:props) {
   return (
     <nav className="px-8 py-2 flex items-center justify-between z-10 app-navbar h-[60px] glass fixed top-0 w-full">
-        <Link className="text-[20px] text-white font-semibold" href="#">
+        <Link className="text-[20px] text-white font-semibold flex items-center" href="#">
+      {isLogo?<Image src="/tweakCSS.png" alt="tweakCSS" width={40} height={40}/>:null}
           tweakCSS
         </Link>
       <div className="flex items-center justify-center">

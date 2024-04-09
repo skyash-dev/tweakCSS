@@ -102,8 +102,8 @@ text-shadow: 0 1px rgb(0 0 0/var(--glass-text-shadow-opacity,5%));
     background-color: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: purple 500;
+    background-color: white 500;
     border-radius: 0em;
   }
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }

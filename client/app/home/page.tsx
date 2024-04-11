@@ -1,8 +1,28 @@
+"use client";
+
 import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
+import Fetch from "@/lib/http";
+import { getallpalettesurl } from "@/lib/kv";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { CiHeart, CiCirclePlus } from "react-icons/ci";
 
 export default function Home() {
+  const [palettes, setPalettes] = useState<any>([]);
+
+  async function fetchPalettes() {
+    const payload = {};
+    const api = new Fetch(payload, getallpalettesurl);
+    const res = await api.get();
+    setPalettes(res.palettes);
+    console.log(res.palettes);
+  }
+
+  useEffect(() => {
+    fetchPalettes();
+  }, []);
+
   return (
     <div className="">
       <div className="static h-[60px]">
@@ -10,23 +30,44 @@ export default function Home() {
       </div>
       <div className="flex">
         <Sidebar></Sidebar>
-        <div className="px-6 py-6 flex w-8/12 flex-wrap">
-        <div className="w-[200px] h-[200px] text-white mx-6 my-6">
-            <div className="bg-[#86469C] w-full h-[72px] rounded-t-xl"></div>
-            <div className="bg-[#BC7FCD] w-full h-[56px]"></div>
-            <div className="bg-[#FB9AD1] w-full h-[40px]"></div>
-            <div className="bg-[#FFCDEA] w-full h-[32px] rounded-b-xl"></div>
-            <div className="flex justify-between items-center px-2 py-2">
-            <span>Fuzzy Stud!</span>
-            <button className="border-[1px] border-white flex flex-row justify-between w-14 items-center px-2 py-1 rounded-md border-opacity-20"><CiHeart /><span className="text-sm">109</span></button>
-            </div>
-        </div>
-        <div className="mx-6 my-6 text-white flex flex-col items-center">
-            <div className="bg-white bg-opacity-10 flex justify-center items-center w-[200px] h-[200px] rounded-xl">
-            <button className="flex flex-row text-3xl transition-all hover:text-4xl"><CiCirclePlus></CiCirclePlus></button>
+        <div className="px-6 py-6 flex max-w-[80%] flex-wrap">
+          {palettes.map((palette: any, i: any) => {
+            return (
+              <div key={i} className="w-[200px] h-[200px] text-white mx-6 my-6">
+                <div className="palette w-11/12 h-44 flex my-4 flex-col">
+                  {Object.keys(palette.color).map((keyName, index) => {
+                    return (
+                      <div
+                        className={`h-1/5 hover:h-2/5 transition-all w-full flex justify-center items-center text-[0] hover:text-base text-black cursor-pointer`}
+                        style={{ backgroundColor: `${palette.color[keyName]}` }}
+                        key={index}
+                      >
+                        {palette.color[keyName]}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="flex justify-between items-center px-2 py-2">
+                  <span>{palette.name}</span>
+                  <Link
+                    href={"/create"}
+                    className="border-[1px] border-white flex flex-row justify-between w-14 items-center px-2 py-1 rounded-md border-opacity-20 hover:scale-105 transition-transform"
+                  >
+                    <CiHeart className="" />
+                    <span className="text-sm">109</span>
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+          <div className="mx-6 my-6 text-white flex flex-col items-center">
+            <div className="bg-white bg-opacity-10 flex justify-center items-center w-[180px] h-[180px] rounded-xl hover:scale-105 transition-transform">
+              <button className="flex flex-row text-3xl transition-all hover:text-4xl">
+                <CiCirclePlus></CiCirclePlus>
+              </button>
             </div>
             <span className="py-2">Create New!</span>
-        </div>
+          </div>
         </div>
       </div>
     </div>

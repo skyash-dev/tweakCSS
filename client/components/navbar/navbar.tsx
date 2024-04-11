@@ -29,7 +29,7 @@ export default function Navbar({isLogo}:props) {
           Docs
         </Link>
         <Link href="#" className="opacity-70 hover:opacity-100">
-          Themes
+          Palettes
         </Link>
         <Link href="#" className="opacity-70 hover:opacity-100">
           Blog

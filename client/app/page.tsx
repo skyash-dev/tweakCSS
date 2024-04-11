@@ -21,10 +21,10 @@ function Hero() {
   return (
     <div className="my-32 flex flex-col items-center">
       <div className="blob w-[550px] h-[200px] rounded-[300px] absolute top-[250px] left-[-200px] origin-left -z-10 blur-3xl bg-opacity-40 opacity-50 bg-gradient-to-r from-[#05051E] to-[#581C87] animate-moveVertical"></div>
-      <div className="absolute h-full md:w-[300px] top-[60px] left-0 rounded-r-full bg-[#05051E] border-white border-opacity-10 border-[1px] w-0 -z-10">
+      <div className="absolute h-[91vh] md:w-[300px] top-[60px] left-0 rounded-r-full bg-[#05051E] border-white border-opacity-10 border-[1px] w-0 -z-10">
       </div>
       <div className="blob w-[550px] h-[200px] rounded-[300px] absolute top-[250px] right-[0px] origin-right -z-10 blur-3xl bg-opacity-40 opacity-50 bg-gradient-to-r from-[#05051E] to-[#581C87] animate-moveVertical"></div>
-      <div className="absolute h-full md:w-[300px] top-[60px] right-0 rounded-l-full bg-[#05051E] border-white border-opacity-10 border-[1px] w-0 -z-10">
+      <div className="absolute h-[91vh] md:w-[300px] top-[60px] right-0 rounded-l-full bg-[#05051E] border-white border-opacity-10 border-[1px] w-0 -z-10">
       </div>
       <Image src="/tweakCSS.png" alt="tweakCSS" width={80} height={80}/>
       <p className="text-[32px] md:text-[45px] text-white font-semibold inter-var text-center w-[350px] md:w-[450px]">

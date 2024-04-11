@@ -18,19 +18,37 @@ import { useEffect, useRef, useState } from 'react';
 import Fetch from '../../lib/http';
 import { useRouter } from 'next/navigation';
 import { signupurl } from '../../lib/kv';
+import { getUserDetails } from "@/utils/getUserDetails"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function SignUp() {
-
+  const {toast} = useToast()
   const router = useRouter();
 	const [input, setInput] = useState({
 		username: '',
 		password: '',
 	});
 
+  async function init(){
+    try{
+      let userDetails:any = await getUserDetails()
+        if(userDetails.isAuthorized){
+          router.push('/')
+          toast({
+            className:'glass text-white',
+            title: `User already logged in!`,
+            duration:1000
+          })
+        }
+      }
+      catch(e){
+        console.log(e);
+        
+      }
+  }
+
   useEffect(() => {
-		if (localStorage.getItem('TOKEN')) {
-			router.push('/')
-		}
+		init()
 	},[]);
 
   const error = (content: string) => {

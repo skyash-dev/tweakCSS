@@ -38,3 +38,9 @@ module.exports.login = (req, res) => {
       }
     })
 }
+
+module.exports.userDetails = (req, res)=>{
+  res.status(200).json({ status: true, userDetails:{
+    isAuthorized:true
+  } });
+}

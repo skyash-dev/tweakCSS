@@ -3,25 +3,33 @@
 import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
 import Fetch from "@/lib/http";
-import { getallpalettesurl } from "@/lib/kv";
+import { getallpalettesurl, getmypalettesurl } from "@/lib/kv";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CiHeart, CiCirclePlus } from "react-icons/ci";
 
 export default function Home() {
+  const [active, setActive] = useState("New");
   const [palettes, setPalettes] = useState<any>([]);
 
   async function fetchPalettes() {
     const payload = {};
-    const api = new Fetch(payload, getallpalettesurl);
-    const res = await api.get();
+    let api;
+    if(active=="New"){
+      api = new Fetch(payload, getallpalettesurl);
+    }
+    else if(active=="MyPalettes"){
+      api = new Fetch(payload, getmypalettesurl);
+    }
+    const res = await api?.get();
     setPalettes(res.palettes);
-    console.log(res.palettes);
+
+
   }
 
   useEffect(() => {
-    fetchPalettes();
-  }, []);
+    fetchPalettes()
+  }, [active]);
 
   return (
     <div className="">
@@ -29,7 +37,7 @@ export default function Home() {
         <Navbar isLogo={true}></Navbar>
       </div>
       <div className="flex">
-        <Sidebar></Sidebar>
+        <Sidebar active={active} setActive={setActive}></Sidebar>
         <div className="px-6 py-6 flex max-w-[80%] flex-wrap">
           {palettes.map((palette: any, i: any) => {
             return (

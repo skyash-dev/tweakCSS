@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from 'next/link'
 
-export default function Sidebar() {
-
-  const [active, setActive] = useState("New");
+export default function Sidebar({active, setActive}:any) {
   
   return (
     <div className="h-[91vh] w-[300px] rounded-r-full bg-[#05051E] border-white border-opacity-10 border-[1px] flex justify-center items-center">

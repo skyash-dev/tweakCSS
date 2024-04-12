@@ -32,7 +32,7 @@ export default function Login() {
 
   async function init(){
     try{
-      let userDetails:any = await getUserDetails()
+      const userDetails:any = await getUserDetails()
         if(userDetails.isAuthorized){
           router.push('/')
           toast({

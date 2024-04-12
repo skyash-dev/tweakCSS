@@ -7,6 +7,7 @@ export const userdetailsurl: string = `${BASE_URI}/auth/userdetails`;
 export const createurl: string = `${BASE_URI}/colorpalette/createpalette`;
 export const cssurl: string = `${BASE_URI}/colorpalette/`;
 export const getallpalettesurl: string = `${BASE_URI}/colorpalette/getallpalettes`;
+export const getmypalettesurl: string = `${BASE_URI}/colorpalette/getmypalettes`;
 
 
 

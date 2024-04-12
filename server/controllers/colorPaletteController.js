@@ -1,6 +1,6 @@
 const ColorPaletteModel = require('../models/colorPalette');
 const UserPalette = require('../models/userPalette');
-const ObjectId = require('mongodb').ObjectId; 
+const Types = require('mongoose').Types; 
 const fs = require('fs')
 
 
@@ -63,7 +63,7 @@ module.exports.getMyPalettes = async (req, res) => {
 
 module.exports.getByID = async (req, res) => {
   let { id } = req.params;
-  let o_id = new ObjectId(id)
+  let o_id = new Types.ObjectId(id)
 
   ColorPaletteModel.findOne({ _id:o_id })
     .then((palette) => {
@@ -73,14 +73,9 @@ module.exports.getByID = async (req, res) => {
         let css=""
         css += Object.keys(palette.color).map((keyName)=>`--${keyName}: ${palette.color[keyName]}`)
         css = css.replaceAll(',',';')
-        fs.writeFile('./public/style.css', `:root{${css}}`, function(err){ 
-            if (err) throw err;
-          }) 
-        fs.readFile('./public/style.css', function(err, data) {
-          res.writeHead(200, {'Content-Type': 'text/css'});
-          res.write(data);
+            res.writeHead(200, {'Content-Type': 'text/css'});
+          res.write(`:root{${css}}`);
           return res.end();
-        });
       }
     })
 }

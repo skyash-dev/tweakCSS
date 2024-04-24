@@ -23,7 +23,7 @@ Content-Type: application/json
 ### Create Palette
 POST http://localhost:3001/api/colorpalette/createpalette
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTE2OTY0MDh9.A-g2vADeYE0ZIebxvDTyDyycma9ez4hSsERlp-kcZkM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTM5NjkxMDB9.550QdwBgwFLKLhJOCrkKnfHdGCxlGloXUR6nYjIivUw
 
 {
     "name": "Fuzzy Palette",
@@ -42,10 +42,10 @@ GET  http://localhost:3001/api/colorpalette/getallpalettes
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTE2OTY0MDh9.A-g2vADeYE0ZIebxvDTyDyycma9ez4hSsERlp-kcZkM
 
 
-### Save My Palette
-POST http://localhost:3001/api/colorpalette/savemypalette
+### Use site Palette
+POST http://localhost:3001/api/colorpalette/usepalette
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTE2OTY0MDh9.A-g2vADeYE0ZIebxvDTyDyycma9ez4hSsERlp-kcZkM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRhbnNodXNhaHUiLCJpYXQiOjE3MTM5Njk5ODh9.nkR-dDndOKgCm3QHso9pa_NNhwj7GqfT7wUzNQsvqDg
 
 {
     "color": {

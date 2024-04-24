@@ -47,19 +47,21 @@ module.exports.getMyPalettes = async (req, res) => {
   }
 }
 
-// module.exports.savePallete = async (req, res) => {
-//   let { color } = req.body;
-//   console.log(color);
+module.exports.savePallete = async (req, res) => {
+  let { color } = req.body;
+  console.log(color);
 
-//   UserPalette.create({name: req.user.username, color})
-//   .then( () => {
-//     res.status(200).json({status: true, msg: "Palette Saved"});
-//   })
-//   .catch(e => {
-//     res.status(400).json({status: false, msg: "Something Went Wrong"});
-//     console.log("SAVING PALETTE ERR ", e);
-//   })
-// }
+  await UserPalette.deleteMany();
+
+  UserPalette.create({name: req.user.username, color})
+  .then( () => {
+    res.status(200).json({status: true, msg: "Palette Saved"});
+  })
+  .catch(e => {
+    res.status(400).json({status: false, msg: "Something Went Wrong"});
+    console.log("SAVING PALETTE ERR ", e);
+  })
+}
 
 module.exports.getByID = async (req, res) => {
   let { id } = req.params;

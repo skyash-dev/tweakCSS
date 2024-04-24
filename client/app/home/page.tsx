@@ -15,20 +15,21 @@ export default function Home() {
   async function fetchPalettes() {
     const payload = {};
     let api;
-    if(active=="New"){
+    if (active == "New") {
       api = new Fetch(payload, getallpalettesurl);
-    }
-    else if(active=="MyPalettes"){
+    } else if (active == "Popular") {
+      api = new Fetch(payload, getmypalettesurl);
+    } else if (active == "Collection") {
+      api = new Fetch(payload, getmypalettesurl);
+    } else if (active == "MyPalettes") {
       api = new Fetch(payload, getmypalettesurl);
     }
     const res = await api?.get();
     setPalettes(res.palettes);
-
-
   }
 
   useEffect(() => {
-    fetchPalettes()
+    fetchPalettes();
   }, [active]);
 
   return (
@@ -37,8 +38,10 @@ export default function Home() {
         <Navbar isLogo={true}></Navbar>
       </div>
       <div className="flex">
-        <Sidebar active={active} setActive={setActive}></Sidebar>
-        <div className="px-6 py-6 flex max-w-[80%] flex-wrap">
+        <div className="static w-0 md:w-[22%]">
+          <Sidebar active={active} setActive={setActive}></Sidebar>
+        </div>
+        <div className="px-6 py-6 flex w-[100%] md:max-w-[78%] flex-wrap justify-center">
           {palettes.map((palette: any, i: any) => {
             return (
               <div key={i} className="w-[200px] h-[200px] text-white mx-6 my-6">
@@ -58,7 +61,7 @@ export default function Home() {
                 <div className="flex justify-between items-center px-2 py-2">
                   <span>{palette.name}</span>
                   <Link
-                    href={"/create"}
+                    href={"/home"}
                     className="border-[1px] border-white flex flex-row justify-between w-14 items-center px-2 py-1 rounded-md border-opacity-20 hover:scale-105 transition-transform"
                   >
                     <CiHeart className="" />
@@ -68,14 +71,17 @@ export default function Home() {
               </div>
             );
           })}
-          <div className="mx-6 my-6 text-white flex flex-col items-center">
+          <Link
+            href={"/create"}
+            className="mx-6 my-6 text-white flex flex-col items-center justify-center"
+          >
             <div className="bg-white bg-opacity-10 flex justify-center items-center w-[180px] h-[180px] rounded-xl hover:scale-105 transition-transform">
-              <button className="flex flex-row text-3xl transition-all hover:text-4xl">
+              <div className="flex flex-col items-center text-3xl transition-all hover:text-4xl">
                 <CiCirclePlus></CiCirclePlus>
-              </button>
+                <span className="text-sm py-2">Create New!</span>
+              </div>
             </div>
-            <span className="py-2">Create New!</span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

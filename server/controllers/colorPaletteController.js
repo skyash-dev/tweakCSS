@@ -64,12 +64,11 @@ module.exports.getMyPalettes = async (req, res) => {
 module.exports.getByID = async (req, res) => {
   let { id } = req.params;
   let o_id = new Types.ObjectId(id)
-
   ColorPaletteModel.findOne({ _id:o_id })
-    .then((palette) => {
-      if (!palette) {
-        res.status(404);
-      } else {
+  .then((palette) => {
+    if (!palette) {
+      res.status(404);
+    } else {
         let css=""
         css += Object.keys(palette.color).map((keyName)=>`--${keyName}: ${palette.color[keyName]}`)
         css = css.replaceAll(',',';')

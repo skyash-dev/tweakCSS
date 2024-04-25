@@ -5,12 +5,14 @@ import Sidebar from "@/components/sidebar/sidebar";
 import Fetch from "@/lib/http";
 import { getallpalettesurl, getmypalettesurl } from "@/lib/kv";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CiHeart, CiCirclePlus } from "react-icons/ci";
+import {FilteredPalettesContext, PalettesContext} from '@/contexts/PalettesContext'
 
 export default function Home() {
   const [active, setActive] = useState("New");
-  const [palettes, setPalettes] = useState<any>([]);
+  const [palettes, setPalettes] = useState([])
+  const [filteredPalettes, setFilteredPalettes] = useState([])
 
   async function fetchPalettes() {
     const payload = {};
@@ -26,6 +28,7 @@ export default function Home() {
     }
     const res = await api?.get();
     setPalettes(res.palettes);
+    setFilteredPalettes(res.palettes);
   }
 
   useEffect(() => {
@@ -33,6 +36,8 @@ export default function Home() {
   }, [active]);
 
   return (
+    <PalettesContext.Provider value={{palettes, setPalettes}}>
+    <FilteredPalettesContext.Provider value={{filteredPalettes, setFilteredPalettes}}>
     <div className="">
       <div className="static h-[60px]">
         <Navbar isLogo={true}></Navbar>
@@ -41,8 +46,8 @@ export default function Home() {
         <div className="static w-0 md:w-[22%]">
           <Sidebar active={active} setActive={setActive}></Sidebar>
         </div>
-        <div className="px-6 py-6 flex w-[100%] md:max-w-[78%] flex-wrap justify-center">
-          {palettes.map((palette: any, i: any) => {
+        <div className="px-6 py-6 flex w-[100%] md:max-w-[78%] flex-wrap">
+          {filteredPalettes.map((palette: any, i: any) => {
             return (
               <div key={i} className="w-[200px] h-[200px] text-white mx-6 my-6">
                 <div className="palette w-11/12 h-44 flex my-4 flex-col">
@@ -85,5 +90,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </FilteredPalettesContext.Provider>
+    </PalettesContext.Provider>
   );
 }

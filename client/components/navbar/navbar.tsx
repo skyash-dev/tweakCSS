@@ -1,14 +1,41 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FilteredPalettesContext, PalettesContext } from "@/contexts/PalettesContext";
+import { useContext, useEffect, useState } from "react";
 
 interface props {
   isLogo:boolean;
 }
 
 export default function Navbar({isLogo}:props) {
+  const [search, setSearch] = useState("");
+  const { palettes, setPalettes } = useContext<any>(PalettesContext);
+  const { filteredPalettes, setFilteredPalettes } = useContext<any>(FilteredPalettesContext);
+  
+    const searchPalettes = ()=>{
+      if (search.length > 0) {
+        let filteredPalettes = palettes?.filter((palette:any) => {
+          const { name } = palette;
+          const searchTerm = search.toLowerCase();
+  
+          return name.toLowerCase().includes(searchTerm);
+        });
+        setFilteredPalettes(filteredPalettes)
+        
+      } else {
+        setFilteredPalettes(palettes)
+      }
+    }
+
+    useEffect(()=>{
+      if(search.length < 1){
+        setFilteredPalettes(palettes)
+      }
+    },[search])
   return (
     <nav className="px-8 py-2 flex items-center justify-between z-10 app-navbar h-[60px] glass fixed top-0 w-full">
-        <Link className="text-[20px] text-white font-semibold flex items-center" href="#">
+        <Link className="text-[20px] text-white font-semibold flex items-center" href="/home">
+          
       {isLogo?<Image src="/tweakCSS.png" alt="tweakCSS" width={40} height={40}/>:null}
           tweakCSS
         </Link>
@@ -20,6 +47,13 @@ export default function Navbar({isLogo}:props) {
               type="text"
               className="outline-none mx-2 bg-transparent text-white text-xs"
               placeholder="Type keywords..."
+              value={search}
+              onChange={(e)=>{setSearch(e.target.value)}}
+              onKeyDown={(e)=>{
+                if(e.code=="Enter"){
+                  searchPalettes()
+                }
+              }}
             />
           </div>
         </div>

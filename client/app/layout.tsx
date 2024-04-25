@@ -18,7 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${urbanist.className} bg-[#05051E]`}>{children}
+      <body className={`${urbanist.className} bg-[#05051E]`}>
+      {children}
       <Toaster/>
       </body>
     </html>

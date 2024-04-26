@@ -23,17 +23,11 @@ export default function Navbar({isLogo}:props) {
           return name.toLowerCase().includes(searchTerm);
         });
         setFilteredPalettes(filteredPalettes)
-        
+
       } else {
         setFilteredPalettes(palettes)
       }
     }
-
-    useEffect(()=>{
-      if(search.length < 1){
-        setFilteredPalettes(palettes)
-      }
-    },[search])
   return (
     <nav className="px-8 py-2 flex items-center justify-between z-10 app-navbar h-[60px] glass fixed top-0 w-full">
         <Link className="text-[20px] text-white font-semibold flex items-center" href="/home">
@@ -50,7 +44,12 @@ export default function Navbar({isLogo}:props) {
               className="outline-none mx-2 bg-transparent text-white text-xs"
               placeholder="Type keywords..."
               value={search}
-              onChange={(e)=>{setSearch(e.target.value)}}
+              onChange={(e)=>{
+                setSearch(e.target.value)
+                if(e.target.value.length < 1){
+                  setFilteredPalettes(palettes)
+                }
+              }}
               onKeyDown={(e)=>{
                 if(e.code=="Enter"){
                   searchPalettes()

@@ -23,26 +23,25 @@ const nodeTypes = { layout: Layout };
 export default function Create() {
   const {toast} = useToast()
 
-  async function init(){
-    try{
-      const userDetails:any = await getUserDetails()
-        if(!userDetails.isAuthorized){
-          toast({
-            className:'text-white',
-            title: `User not logged in!`,
-            duration:1000,
-            variant: 'destructive'
-          })
-          router.push('/')
-        }
-      }
-      catch(e){
-        console.log(e);
-        
-      }
-  }
-
   useEffect(()=>{
+    async function init(){
+      try{
+        const userDetails:any = await getUserDetails()
+          if(!userDetails.isAuthorized){
+            toast({
+              className:'text-white',
+              title: `User not logged in!`,
+              duration:1000,
+              variant: 'destructive'
+            })
+            router.push('/')
+          }
+        }
+        catch(e){
+          console.log(e);
+          
+        }
+    }
     init()
   },[])
 

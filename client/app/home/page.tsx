@@ -14,24 +14,23 @@ export default function Home() {
   const [palettes, setPalettes] = useState([])
   const [filteredPalettes, setFilteredPalettes] = useState([])
 
-  async function fetchPalettes() {
-    const payload = {};
-    let api;
-    if (active == "New") {
-      api = new Fetch(payload, getallpalettesurl);
-    } else if (active == "Popular") {
-      api = new Fetch(payload, getmypalettesurl);
-    } else if (active == "Collection") {
-      api = new Fetch(payload, getmypalettesurl);
-    } else if (active == "MyPalettes") {
-      api = new Fetch(payload, getmypalettesurl);
-    }
-    const res = await api?.get();
-    setPalettes(res.palettes);
-    setFilteredPalettes(res.palettes);
-  }
-
   useEffect(() => {
+    async function fetchPalettes() {
+      const payload = {};
+      let api;
+      if (active == "New") {
+        api = new Fetch(payload, getallpalettesurl);
+      } else if (active == "Popular") {
+        api = new Fetch(payload, getmypalettesurl);
+      } else if (active == "Collection") {
+        api = new Fetch(payload, getmypalettesurl);
+      } else if (active == "MyPalettes") {
+        api = new Fetch(payload, getmypalettesurl);
+      }
+      const res = await api?.get();
+      setPalettes(res.palettes);
+      setFilteredPalettes(res.palettes);
+    }
     fetchPalettes();
   }, [active]);
 

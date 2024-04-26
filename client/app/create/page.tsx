@@ -325,7 +325,7 @@ function LinkDialog({name, colors}:any) {
     </Dialog>
   )
 }
-export function CSSDialog({css}:any) { 
+function CSSDialog({css}:any) { 
   return (
     <Dialog>
       <DialogTrigger asChild>

@@ -241,7 +241,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { getUserDetails } from "@/utils/getUserDetails";
 
 
-export function LinkDialog({name, colors}:any) {
+function LinkDialog({name, colors}:any) {
   const error = (content: string) => {
     toast({content});
   }
